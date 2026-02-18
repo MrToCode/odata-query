@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(uv:*)",
+      "Bash(mv:*)",
+      "Bash(ls:*)",
+      "Bash(cp:*)",
+      "Write",
+      "Edit",
+      "Bash(chmod:*)",
+      "Bash(touch:*)",
+      "WebFetch(domain:context7.com)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(python:*)",
+      "Bash(pytest:*)"
+    ],
+    "deny": [
+      "Read(ai_ignore_files/**)",
+      "Read(ai_reports/archive/**)"
+    ]
+  },
+  "hooks": {}
+}
