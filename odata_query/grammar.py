@@ -153,10 +153,10 @@ class ODataLexer(Lexer):
         t.value = ast.Geography(t.value[10:-1])
         return t
 
-    @_(r"[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}")
+    @_(r"'?[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}'?")
     def GUID(self, t):
         ":meta private:"
-        t.value = ast.GUID(t.value)
+        t.value = ast.GUID(t.value.strip("'"))
         return t
 
     @_(_DATE + r"T" + _TIME + r"?(Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)?")
