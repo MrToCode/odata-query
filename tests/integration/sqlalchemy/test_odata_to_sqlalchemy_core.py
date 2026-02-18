@@ -1,9 +1,10 @@
 import datetime as dt
+from uuid import UUID
 
 import pytest
 from sqlalchemy.sql import functions
 from sqlalchemy.sql.expression import cast, extract, literal
-from sqlalchemy.types import Date, Time
+from sqlalchemy.types import Date, Time, Uuid
 
 from odata_query.sqlalchemy import AstToSqlAlchemyCoreVisitor, functions_ext
 
@@ -23,15 +24,22 @@ def tz(offset: int) -> dt.tzinfo:
     [
         (
             "id eq a7af27e6-f5a0-11e9-9649-0a252986adba",
-            BlogPost.c.id == "a7af27e6-f5a0-11e9-9649-0a252986adba",
+            BlogPost.c.id
+            == literal(
+                UUID("a7af27e6-f5a0-11e9-9649-0a252986adba"), type_=Uuid()
+            ),
         ),
         ("my_app.c.id eq 1", BlogPost.c.id == 1),
         (
             "id in (a7af27e6-f5a0-11e9-9649-0a252986adba, 800c56e4-354d-11eb-be38-3af9d323e83c)",
             BlogPost.c.id.in_(
                 [
-                    literal("a7af27e6-f5a0-11e9-9649-0a252986adba"),
-                    literal("800c56e4-354d-11eb-be38-3af9d323e83c"),
+                    literal(
+                        UUID("a7af27e6-f5a0-11e9-9649-0a252986adba"), type_=Uuid()
+                    ),
+                    literal(
+                        UUID("800c56e4-354d-11eb-be38-3af9d323e83c"), type_=Uuid()
+                    ),
                 ]
             ),
         ),

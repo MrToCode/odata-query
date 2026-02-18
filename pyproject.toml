@@ -1,6 +1,6 @@
 [project]
 name = "odata-query"
-version = "0.10.0"
+version = "0.11.0"
 description = "An OData query parser and transpiler."
 readme = "README.rst"
 requires-python = ">=3.7"
@@ -44,7 +44,7 @@ linting = [
     "vulture>=2.3,<3",
     "yamllint",
 ]
-sqlalchemy = ["sqlalchemy>=1.4,<2"]
+sqlalchemy = ["sqlalchemy>=2.0"]
 testing = [
     "pytest>=6.2,<8",
     "pytest-cov",
@@ -76,7 +76,7 @@ testing = [
 
 [tool.poetry]
 name = "odata-query"
-version = "0.10.0"
+version = "0.11.0"
 description = "An OData query parser and transpiler."
 authors = ["Oliver Hofkens <oliver@gorilla.co>"]
 readme = "README.rst"
@@ -105,7 +105,7 @@ python-dateutil = "^2.8.1"
 sly = "^0.4"
 
 django = { version = ">=2.2", optional = true }
-sqlalchemy = { version = "^1.4", optional = true }
+sqlalchemy = { version = ">=2.0", optional = true }
 
 black = { version = "^22.1", optional = true }
 bump2version = { version = "^1.0", optional = true }

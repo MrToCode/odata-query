@@ -10,10 +10,29 @@ and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0
 [Unreleased]
 ---------------------
 
+
+[0.11.0] - 2026-02-18
+---------------------
+
 Changed
 ^^^^^^^
 
 * Log ``debug`` instead of ``warning`` when type inference fails.
+* SQLAlchemy: minimum supported version is now **2.0**. SQLAlchemy 1.x is no
+  longer supported.
+* SQLAlchemy: import paths updated to the consolidated ``sqlalchemy.orm``
+  namespace (``InstrumentedAttribute``, ``DeclarativeMeta``,
+  ``RelationshipProperty``).
+* SQLAlchemy: GUID/UUID literals now emit a properly-typed ``Uuid``
+  bind parameter, preventing ``uuid = character varying`` errors on
+  PostgreSQL UUID columns.
+
+Removed
+^^^^^^^
+
+* SQLAlchemy: legacy ``Session.query()`` / ``Query``-style ORM compatibility
+  removed. Use ``select(Model)`` with ``Session.execute()`` (SQLAlchemy 2.0
+  style).
 
 
 [0.10.0] - 2024-01-21

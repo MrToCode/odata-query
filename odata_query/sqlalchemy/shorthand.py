@@ -1,6 +1,5 @@
 from typing import List, Optional, Type
 
-from sqlalchemy.orm.query import Query
 from sqlalchemy.sql.expression import ClauseElement, Select
 
 from odata_query.grammar import ODataLexer, ODataParser  # type: ignore
@@ -10,20 +9,13 @@ from .orm import AstToSqlAlchemyOrmVisitor
 
 
 def _get_joined_attrs(query: Select) -> List[str]:
-    # use _legacy_setup_joins for legacy Query objects
-    setup_joins = (
-        getattr(query, "_legacy_setup_joins", query._setup_joins) or query._setup_joins
-    )
-    return [str(join[0]) for join in setup_joins]
+    return [str(join[0]) for join in query._setup_joins]
 
 
 def _get_model(query: ClauseElement, model: Optional[Type] = None) -> type:
     if model is not None:
         return model
-    clause_elem = (
-        query.__clause_element__() if isinstance(query, Query) else query
-    )
-    return clause_elem.columns_clause_froms[0].entity_namespace
+    return query.columns_clause_froms[0].entity_namespace
 
 
 def apply_odata_query(

@@ -35,14 +35,6 @@ def sample_data_sess(db_session):
     s.rollback()
 
 
-def apply_odata_query_bc_sqla1(*args, **kwargs):
-    """
-    Check for backwards compatibility with the "old style" of ORM querying.
-    See: GITHUB-34
-    """
-    return apply_odata_query(*args, **kwargs)
-
-
 @pytest.mark.parametrize(
     "model, query, exp_results",
     [
@@ -73,7 +65,6 @@ def apply_odata_query_bc_sqla1(*args, **kwargs):
     "apply_func",
     [
         pytest.param(apply_odata_query, id="ORM"),
-        pytest.param(apply_odata_query_bc_sqla1, id="ORM 1.x"),
         pytest.param(apply_odata_core, id="Core"),
     ],
 )
@@ -84,16 +75,8 @@ def test_query_with_odata(
     apply_func: Callable,
     sample_data_sess,
 ):
-    # ORM mode 1.x:
-    if apply_func is apply_odata_query_bc_sqla1:
-        base_q = sample_data_sess.query(model)
-        q = apply_func(base_q, query)
-        results = q.all()
-        assert len(results) == exp_results
-        return
-
     # ORM mode:
-    elif apply_func is apply_odata_query:
+    if apply_func is apply_odata_query:
         base_q = select(model)
 
     # Core mode:
@@ -112,38 +95,15 @@ def test_query_with_odata(
     assert len(results) == exp_results
 
 
-@pytest.mark.parametrize(
-    "apply_func",
-    [
-        pytest.param(apply_odata_query, id="ORM"),
-        pytest.param(apply_odata_query_bc_sqla1, id="ORM 1.x"),
-    ],
-)
-def test_query_with_existing_join(apply_func, sample_data_sess):
+def test_query_with_existing_join(sample_data_sess):
     """
     GITHUB-37
     """
     odata_query = "author/name eq 'Gorilla'"
     exp_results = 1
 
-    # ORM mode 1.x:
-    if apply_func is apply_odata_query_bc_sqla1:
-        base_q = sample_data_sess.query(Comment).join(
-            Author, Comment.author_id == Author.id
-        )
-        q = apply_func(base_q, odata_query)
-        results = q.all()
-        assert len(results) == exp_results
-        return
-
-    # ORM mode:
-    elif apply_func is apply_odata_query:
-        base_q = select(Comment).join(Comment.author)
-
-    else:
-        raise ValueError(apply_func)
-
-    q = apply_func(base_q, odata_query)
+    base_q = select(Comment).join(Comment.author)
+    q = apply_odata_query(base_q, odata_query)
 
     results = sample_data_sess.execute(q).scalars().all()
     assert len(results) == exp_results

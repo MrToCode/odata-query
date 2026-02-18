@@ -1,9 +1,7 @@
 from typing import List, Type
 
-from sqlalchemy.inspection import inspect
-from sqlalchemy.orm.attributes import InstrumentedAttribute
-from sqlalchemy.orm.decl_api import DeclarativeMeta
-from sqlalchemy.orm.relationships import RelationshipProperty
+from sqlalchemy import inspect
+from sqlalchemy.orm import DeclarativeMeta, InstrumentedAttribute, RelationshipProperty
 from sqlalchemy.sql.expression import BinaryExpression, ClauseElement, ColumnClause
 
 from odata_query import ast, exceptions as ex, utils, visitor
@@ -99,9 +97,9 @@ class AstToSqlAlchemyOrmVisitor(common._CommonVisitors, visitor.NodeVisitor):
         try:
             prop_inspect = inspect(elem).property
             if isinstance(prop_inspect, RelationshipProperty):
-                foreign_key = prop_inspect._calculated_foreign_keys
-                if len(foreign_key) == 1:
-                    return next(iter(foreign_key))
+                foreign_keys = {pair[0] for pair in prop_inspect.synchronize_pairs}
+                if len(foreign_keys) == 1:
+                    return next(iter(foreign_keys))
         except Exception:
             pass
 
