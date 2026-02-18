@@ -1,7 +1,9 @@
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, Text
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import DeclarativeBase, mapped_column, relationship
 
-Base = declarative_base()
+
+class Base(DeclarativeBase):
+    pass
 
 
 author_blogpost = Table(
@@ -15,8 +17,8 @@ author_blogpost = Table(
 class Author(Base):
     __tablename__ = "author"
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    id = mapped_column(Integer, primary_key=True)
+    name = mapped_column(String, nullable=False)
 
     blogposts = relationship(
         "BlogPost", back_populates="authors", secondary=author_blogpost
@@ -27,10 +29,10 @@ class Author(Base):
 class BlogPost(Base):
     __tablename__ = "blogpost"
 
-    id = Column(Integer, primary_key=True)
-    published_at = Column(DateTime, nullable=False)
-    title = Column(String, nullable=False)
-    content = Column(Text)
+    id = mapped_column(Integer, primary_key=True)
+    published_at = mapped_column(DateTime, nullable=False)
+    title = mapped_column(String, nullable=False)
+    content = mapped_column(Text)
 
     authors = relationship(
         "Author", back_populates="blogposts", secondary=author_blogpost
@@ -41,10 +43,10 @@ class BlogPost(Base):
 class Comment(Base):
     __tablename__ = "comment"
 
-    id = Column(Integer, primary_key=True)
-    content = Column(Text)
+    id = mapped_column(Integer, primary_key=True)
+    content = mapped_column(Text)
 
-    author_id = Column(Integer, ForeignKey("author.id"))
+    author_id = mapped_column(Integer, ForeignKey("author.id"))
     author = relationship("Author", back_populates="comments")
-    blogpost_id = Column(Integer, ForeignKey("blogpost.id"))
+    blogpost_id = mapped_column(Integer, ForeignKey("blogpost.id"))
     blogpost = relationship("BlogPost", back_populates="comments")

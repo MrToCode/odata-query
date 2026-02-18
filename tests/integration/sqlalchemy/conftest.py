@@ -7,7 +7,7 @@ from .models import Base
 
 @pytest.fixture(scope="session")
 def db_engine():
-    engine = create_engine("sqlite://", future=True)
+    engine = create_engine("sqlite://")
     Base.metadata.create_all(engine)
     yield engine
     engine.dispose()
@@ -15,5 +15,5 @@ def db_engine():
 
 @pytest.fixture(scope="session")
 def db_session(db_engine):
-    session = sessionmaker(bind=db_engine)
+    session = sessionmaker(db_engine)
     return session

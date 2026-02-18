@@ -33,7 +33,7 @@ of your choice:
 The package defines the following optional ``extra``'s:
 
 * ``django``: If you want to pin a compatible Django version.
-* ``sqlalchemy``: If you want to pin a compatible SQLAlchemy version.
+* ``sqlalchemy``: SQLAlchemy 2.0+ integration (ORM and Core filter transpilation).
 
 
 The following ``extra``'s relate to the development of this library:
@@ -125,7 +125,7 @@ Licensed under the MIT License.
 
 .. _odata v4: https://www.odata.org/
 .. _django queries: https://docs.djangoproject.com/en/3.2/topics/db/queries/
-.. _sqlalchemy queries: https://docs.sqlalchemy.org/en/14/orm/loading_objects.html
+.. _sqlalchemy queries: https://docs.sqlalchemy.org/en/20/orm/loading_objects.html
 .. _documentation: https://odata-query.readthedocs.io/en/latest
 .. _Gorillini NV: https://gorilla.co/
 .. _contributing guidelines: ./CONTRIBUTING.rst
