@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "uv: sync (dev)",
+            "type": "shell",
+            "command": "uv sync --dev",
+            "problemMatcher": []
+        },
+        {
+            "label": "test: pytest",
+            "type": "shell",
+            "command": "uv run pytest",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint: ruff check",
+            "type": "shell",
+            "command": "uv run ruff check .",
+            "problemMatcher": []
+        },
+        {
+            "label": "fmt: ruff format",
+            "type": "shell",
+            "command": "uv run ruff format .",
+            "problemMatcher": []
+        },
+        {
+            "label": "typecheck: mypy",
+            "type": "shell",
+            "command": "uv run mypy src",
+            "problemMatcher": []
+        },
+        {
+            "label": "typecheck: pyright",
+            "type": "shell",
+            "command": "uv run pyright",
+            "problemMatcher": []
+        }
+    ]
+}

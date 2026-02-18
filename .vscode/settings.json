@@ -1,0 +1,40 @@
+{
+    "files.exclude": {
+        "**/legacy": true
+    },
+    "search.exclude": {
+        "**/legacy": true
+    },
+    "python.createEnvironment.contentButton": "show",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/odata_query",
+        "${workspaceFolder}/tests"
+    ],
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.testing.pytestArgs": [
+        "tests",
+        "-s",
+        "-v"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    // "terminal.integrated.env.linux": {
+    //     "PYTHONPATH": "${workspaceFolder}:${workspaceFolder}/TcApp:${workspaceFolder}/reflex:${env:PYTHONPATH}"
+    // },
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyCategorySeverity.error": "Warning",
+    "python.linting.mypyArgs": [
+        "--ignore-missing-imports",
+        "--follow-imports=silent",
+        "--show-column-numbers",
+        "--disallow-untyped-defs",
+        "--disallow-untyped-calls"
+    ],
+    "python.analysis.extraPaths": ["${workspaceFolder}/odata_query", "${workspaceFolder}/tests"],
+    "files.autoSave": "onFocusChange",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python-envs.pythonProjects": [],
+    "ansible.python.interpreterPath": "${workspaceFolder}/.venv/bin/python"
+}
