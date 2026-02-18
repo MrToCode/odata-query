@@ -1,0 +1,28 @@
+claude --dangerously-skip-permissions
+
+https://code.claude.com/docs/en/chrome
+https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn
+claude --dangerously-skip-permissions --chrome
+
+gemini --yolo --resume
+
+/home/aturner/Development/Git/TcProjects/tc_mkd_svc
+source /home/aturner/Development/Git/TcProjects/tc_mkd_svc/.venv/bin/activate
+source ./.venv/bin/activate
+
+sudo npm install -g @openai/codex@latest
+
+
+export ANTHROPIC_AUTH_TOKEN="710aff1431464157b2dda37a9d0ed239.UwVVhyZ9MQvxOLyf"
+export ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic/"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-5"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-5"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.7-flash"
+claude --dangerously-skip-permissions
+
+export ANTHROPIC_AUTH_TOKEN="710aff1431464157b2dda37a9d0ed239.UwVVhyZ9MQvxOLyf"
+export ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic/"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.7"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.7"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.7-flash"
+claude --dangerously-skip-permissions
