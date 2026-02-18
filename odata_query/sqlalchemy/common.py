@@ -21,6 +21,13 @@ from sqlalchemy.sql.expression import (
 )
 from sqlalchemy.types import Date, Time
 
+try:
+    from sqlalchemy.types import Uuid as _UuidType
+
+    _SQLA_HAS_UUID = True
+except ImportError:  # SQLAlchemy < 2.0
+    _SQLA_HAS_UUID = False
+
 from odata_query import ast, exceptions as ex, typing, visitor
 
 from . import functions_ext
@@ -81,7 +88,9 @@ class _CommonVisitors(visitor.NodeVisitor):
 
     def visit_GUID(self, node: ast.GUID) -> BindParameter:
         ":meta private:"
-        return literal(node.val)
+        if _SQLA_HAS_UUID:
+            return literal(node.py_val, type_=_UuidType())
+        return literal(node.val)  # SQLAlchemy < 2.0: use string representation
 
     def visit_List(self, node: ast.List) -> list:
         ":meta private:"
