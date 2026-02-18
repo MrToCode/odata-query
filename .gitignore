@@ -108,3 +108,5 @@ node_modules/
 
 tests/integration/django/db/*
 tests/data/world_borders/*
+
+.DS_Store
