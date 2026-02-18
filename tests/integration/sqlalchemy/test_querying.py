@@ -147,3 +147,11 @@ def test_query_with_existing_join(apply_func, sample_data_sess):
 
     results = sample_data_sess.execute(q).scalars().all()
     assert len(results) == exp_results
+
+
+def test_query_with_explicit_model(sample_data_sess):
+    """PR #65 — explicit model override for apply_odata_query."""
+    base_q = select(Author)
+    q = apply_odata_query(base_q, "name eq 'Baboon'", model=Author)
+    results = sample_data_sess.execute(q).scalars().all()
+    assert len(results) == 1

@@ -33,10 +33,10 @@ Recommended intake set:
 
 Use one integration branch per upstream PR, then a final consolidation branch.
 
-1. `codex/pr65-pass-model`
-2. `codex/pr60-uuid-fix`
-3. `codex/pr-intake-rollup` (optional, only if team wants one branch for release)
+1. `ai/pr/parent/pr65-pass-model`
+2. `ai/pr/parent/pr60-uuid-fix`
 
+when complete the tasks then merge into `tc/master`
 ---
 
 ## 4. Pre-Flight Checklist (Agent)
